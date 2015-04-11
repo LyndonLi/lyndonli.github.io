@@ -21,8 +21,13 @@
 
 <body>
 
-<div id="wrap">
+<!-- <embed src="./resources/audio/butterfly.mp3" autostart="true" loop="true" width="0" height="0"></embed> --><!--背景音乐循环-->
+<audio autoplay="autoplay" id="audio_play" loop="loop">  
+	<source src="./resources/audio/butterfly.mp3" type="audio/mpeg">   
+</audio> 
 
+<div id="wrap">
+  <!--加载页面-->
   <div id="loading" class="in">loading</div>
 
 
@@ -36,12 +41,10 @@
   </section>
 
   <!--页面11-->
-  <!--页面内容需要替换-->
+  <!--游戏介绍-->
   <section class="page" id="page11">
     <div class="main">
       <div class="page11p"></div>
-      <a class="goto2" href="">点击观看2月刊</a>
-      <a class="gotoCover" href="javascript:;">返回会刊目录</a>
 	</div>
   </section>
 
@@ -102,9 +105,9 @@ $(function(){
 	//你的结束回调函数
 	var onGameOver = function(score){
 		console.log("我居然得了",score,"分");
-		if(score >= 20){
+		if(score >= 5){
 			$(".btn-lottery").removeClass("off");//抽奖解禁!
-			$(".txt-hint").html("恭喜！在你的帮助下空气变得清新了！<br>请留下联系方式，我们将随机抽取<br>30位小超人赠予PANDA W抗霾面膜套装。");
+			$(".txt-hint").html("恭喜！在你的帮助下空气变得清新了！<br>快来点击宝箱领取你的奖励吧");
 		}else{
 			$(".btn-lottery").addClass("off");
 			$(".txt-hint").html("好遗憾，还有好多雾霾没有净化。<br>再玩一次能飞更远哦~");

@@ -49,7 +49,7 @@ $(function(){
 	});
 	sapp.audio.add("resources/audio/fly.mp3");
 	sapp.audio.add("resources/audio/over.mp3");
-
+    sapp.audio.add("resources/audio/butterfly.mp3");
 });
 
 
