@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<script src="http://ap.vip.com/statics/touch/jquery.min.js"></script>
+<script src="resources/js/cut.web.min.js"></script>
+<script src="resources/js/sapp.js"></script>
+<script src="resources/js/com.js"></script>
+<link href="resources/css/style.css" rel="stylesheet">
+
+<title>唯品会</title>
+<meta name="front-end technicist" content="蕉皮">
+<!--分享-->
+<!-- <meta name="shareIcon" content="resources/images/share_icon.jpg">
+<meta name="shareText" content="分享文案"> -->
+</head>
+
+<body>
+
+<div id="wrap">
+
+  <div id="loading" class="in">loading</div>
+
+
+  <!--页面10-->
+  <section class="page" id="page10">
+    <div class="main">
+      <div class="page10p"></div>
+      <a class="gotoGame" href="javascript:;">开始游戏</a>
+      <div class="scroll"></div>
+	</div>
+  </section>
+
+  <!--页面11-->
+  <section class="page" id="page11">
+    <div class="main">
+      <div class="page11p"></div>
+      <a class="goto2" href="http://weixin-api.vip.com/v2/redirect/?type=3&src=http%3A%2F%2Fweixin-act.vip.com%2F%3Faid%3DlightApp">点击观看2月刊</a>
+      <a class="gotoCover" href="javascript:;">返回会刊目录</a>
+	</div>
+  </section>
+
+  <!--游戏页-->
+  <section class="page" id="game">
+    <div class="main">
+      <div class="readyTitle"></div>
+      <div class="playHint"><b></b></div>
+
+      <div id="scoreTop"></div>
+
+      <div class="overTitle"></div>
+      <div id="scoreOver"></div>
+      <a class="btn-again" href="javascript:;">再来一次</a>
+      <div class="txt-hint">好遗憾，还有好多雾霾没有净化。<br>再玩一次能飞更远哦~</div>
+      <a class="btn-lottery off" href="javascript:;">立刻抽奖</a>
+      <div class="scroll"></div>
+	</div>
+  </section>
+
+
+
+  <!--结果页-->
+  <section class="page" id="result">
+    <div class="main">
+      <div class="result-head"><img src="resources/images/test.jpg"></div>
+      <div class="result-score">我成功净化<b>20</b>根烟囱</div>
+      <div class="result-text">现在向你发起挑战，<br>快来打败我吧，还有免费面膜拿哦！</div>
+      <div class="scroll"></div>
+	</div>
+  </section>
+
+
+  <!--控件层-->
+  <aside id="aside">
+    <div class="main">
+      <!--弹窗1-->
+	  <div id="pop1" class="pop">
+	  	<div class="pop-title">已经中过啦</div>
+	  	<a class="pop-close" href="javascript:;"></a>
+	  	<a class="btn-again" href="javascript:;">再来一次</a>
+	  </div>
+      <!--弹窗2-->
+	  <div id="pop2" class="pop">
+	  	<div class="pop-title">登记完成</div>
+	  	<a class="pop-close" href="javascript:;"></a>
+	  	<a class="btn-again" href="javascript:;">再来一次</a>
+	  </div>
+	</div>
+  </aside>
+
+</div>
+
+
+<script>
+/*给开发的*/
+$(function(){
+	//你的结束回调函数
+	var onGameOver = function(score){
+		console.log("我居然得了",score,"分");
+		if(score >= 20){
+			$(".btn-lottery").removeClass("off");//抽奖解禁!
+			$(".txt-hint").html("恭喜！在你的帮助下空气变得清新了！<br>请留下联系方式，我们将随机抽取<br>30位小超人赠予PANDA W抗霾面膜套装。");
+		}else{
+			$(".btn-lottery").addClass("off");
+			$(".txt-hint").html("好遗憾，还有好多雾霾没有净化。<br>再玩一次能飞更远哦~");
+		}
+	}
+	//游戏初始化
+	game.init();
+
+	$(".gotoGame").click(function(){
+		//跳转至游戏页
+		sapp.page.go(3);
+		//绑定首次ready点击
+		$(window).one("touchstart", function(){
+			$(".readyTitle, .playHint").hide();
+			game.start(onGameOver);
+		})
+	});
+	$(".btn-again").click(function(){
+		game.start(onGameOver);
+	});
+	$(".pop .btn-again, .pop-close").click(function(){
+		$(".pop").hide();
+	});
+	//
+	$(".btn-lottery").click(function(){
+		$("#pop2").show();
+	});
+});
+</script>
+
+<!--埋点js-->
+<script src="http://3rd-app.vipstatic.com/mars/mars_wap.js"></script>
+</body>
+</html>
